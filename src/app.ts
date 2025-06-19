@@ -1,8 +1,8 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
-import BookRoutes from "./modules/book/book.route";
-import { globalErrorHandler } from "./middleware/errorHandler";
-import BorrowRoutes from "./modules/borrow/borrow.route";
+import BookRoutes from "./app/modules/book/book.route";
+import { globalErrorHandler } from "./app/middleware/errorHandler";
+import BorrowRoutes from "./app/modules/borrow/borrow.route";
 
 const app: Application = express();
 

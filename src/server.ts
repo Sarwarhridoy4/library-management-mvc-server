@@ -1,7 +1,6 @@
-import dotenv from "dotenv";
-dotenv.config(); 
+import "dotenv/config"; // Load environment variables from .env file
 import app from "./app";
-import connectDB from "./config/db"; // must come *after* dotenv.config()
+import connectDB from "./app/config/db"; // must come *after* dotenv.config()
 
 const port = process.env.PORT || 5000;
 

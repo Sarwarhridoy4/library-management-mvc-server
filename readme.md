@@ -20,33 +20,41 @@ A robust, type-safe, and modular REST API built using Express, TypeScript, and M
 
 # 📁 Project Structure
 
-```bash
+````bash
 src/
-├── app.ts # Express app config
-├── server.ts # Entry point
-├── routes/ # Home routes
-│ └── index.ts
-├── modules/
-│ ├── book/
-│ │ ├── book.controller.ts
-│ │ ├── book.model.ts
-│ │ ├── book.route.ts
-│ │ ├── book.service.ts
-│ │ └── book.interface.ts
-│ └── borrow/
-│ ├── borrow.controller.ts
-│ ├── borrow.model.ts
-│ ├── borrow.route.ts
-│ ├── borrow.service.ts
-│ └── borrow.interface.ts
-├── middlewares/
-│ └── errorHandler.ts
-├── utils/
-│ ├── sendResponse.ts
-│ └── sendResponse.interface.ts
-└── config/
-└── db.ts # MongoDB connection
-```
+├── app/
+│   ├── routes/                 # Home routes
+│   │   └── index.ts
+│   ├── modules/
+│   │   ├── book/
+│   │   │   ├── book.controller.ts
+│   │   │   ├── book.model.ts
+│   │   │   ├── book.route.ts
+│   │   │   ├── book.service.ts
+│   │   │   └── book.interface.ts
+│   │   └── borrow/
+│   │       ├── borrow.controller.ts
+│   │       ├── borrow.model.ts
+│   │       ├── borrow.route.ts
+│   │       ├── borrow.service.ts
+│   │       └── borrow.interface.ts
+│   ├── middlewares/
+│   │   └── errorHandler.ts
+│   ├── utils/
+│   │   ├── sendResponse.ts
+│   │   └── sendResponse.interface.ts
+│   └── config/
+│       └── db.ts               # MongoDB connection
+├── app.ts                      # Express app configuration
+├── server.ts                   # Application entry point
+└── .env                        # Environment variables
+├── .gitignore
+├── eslint.config.mjs         # ESLint Flat Config (using @eslint/js +typescript-eslint)
+├── package.json
+├── package-lock.json
+├── readme.md
+├── tsconfig.json
+
 
 **🧪 Technologies Used**
 
@@ -67,7 +75,7 @@ src/
 ```bash
 
 http://localhost:5000/api
-```
+````
 
 **🌐 Home Route**
 `GET /`
