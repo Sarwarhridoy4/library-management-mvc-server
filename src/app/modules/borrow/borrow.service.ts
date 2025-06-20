@@ -18,7 +18,7 @@ const borrowBook = async (bookId: string, quantity: number, dueDate: Date) => {
 };
 
 const getBorrowSummary = async () => {
-  return Borrow.aggregate([
+  const summary = await Borrow.aggregate([
     {
       $group: {
         _id: "$book",
@@ -38,15 +38,23 @@ const getBorrowSummary = async () => {
     },
     {
       $project: {
+        _id: 0,
+        totalQuantity: 1,
         book: {
           title: "$bookDetails.title",
           isbn: "$bookDetails.isbn",
         },
-        totalQuantity: 1,
       },
     },
   ]);
+
+  return {
+    success: true,
+    message: "Borrowed books summary retrieved successfully",
+    data: summary,
+  };
 };
+
 
 export const BorrowService = {
   borrowBook,

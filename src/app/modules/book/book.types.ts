@@ -6,3 +6,11 @@ export type Genre =
   | "HISTORY"
   | "BIOGRAPHY"
   | "FANTASY";
+
+  export type IBookQuery = {
+  filter ?: Genre;
+  sortBy ?: string;
+  sort ?: "asc" | "desc";
+  limit ?: number;
+  page ?: number;
+};

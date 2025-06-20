@@ -32,6 +32,7 @@ const bookSchema = new Schema<IBookDocument>(
 );
 
 bookSchema.methods.updateAvailability = function () {
+  // Update the availability based on the number of copies
   this.available = this.copies > 0;
   return this.save();
 };

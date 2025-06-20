@@ -37,7 +37,7 @@ export const getBorrowSummary = async (
     sendResponse(res, {
       success: true,
       message: "Borrowed books summary retrieved successfully",
-      data: summary,
+      data: summary.data,
     });
   } catch (error) {
     next(error);

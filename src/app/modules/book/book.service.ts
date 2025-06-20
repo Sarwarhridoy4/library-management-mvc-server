@@ -2,13 +2,14 @@
 import { IBookBase, IBookDocument } from "./book.interface";
 import { Book } from "./book.model";
 import { FilterQuery } from "mongoose";
+import { IBookQuery } from "./book.types";
 
 export const createBook = async (payload: IBookBase) => {
   const book = new Book(payload);
   return book.save();
 };
 
-export const getBooks = async (query: any) => {
+export const getBooks = async (query: IBookQuery) => {
   const filter: FilterQuery<IBookDocument> = {};
   if (query.filter) filter.genre = query.filter;
 

@@ -1,11 +1,9 @@
 // src/modules/book/book.controller.ts
 import { Request, Response, NextFunction } from "express";
 
-
 import { createBookZodSchema, updateBookZodSchema } from "./book.validation";
 import { sendResponse } from "../../utils/sendResponse";
 import { BookService } from "./book.service";
-
 
 export const createBook = async (
   req: Request,
@@ -16,6 +14,7 @@ export const createBook = async (
     const parsed = createBookZodSchema.parse(req.body);
     const result = await BookService.createBook(parsed);
     sendResponse(res, {
+      statusCode: 201,
       success: true,
       message: "Book created successfully",
       data: result,
@@ -33,6 +32,7 @@ export const getBooks = async (
   try {
     const result = await BookService.getBooks(req.query);
     sendResponse(res, {
+      statusCode: 200,
       success: true,
       message: "Books retrieved successfully",
       data: result,
@@ -68,6 +68,7 @@ export const updateBook = async (
     const parsed = updateBookZodSchema.parse(req.body);
     const result = await BookService.updateBook(req.params.bookId, parsed);
     sendResponse(res, {
+      statusCode: 200,
       success: true,
       message: "Book updated successfully",
       data: result,
@@ -83,8 +84,9 @@ export const deleteBook = async (
   next: NextFunction
 ) => {
   try {
-    await BookService.deleteBook(req.params.bookId);
+    BookService.deleteBook(req.params.bookId);
     sendResponse(res, {
+      statusCode: 204,
       success: true,
       message: "Book deleted successfully",
       data: null,
