@@ -54,6 +54,7 @@ src/
 ├── package-lock.json
 ├── readme.md
 ├── tsconfig.json
+```
 
 
 **🧪 Technologies Used**
