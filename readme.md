@@ -2,6 +2,8 @@
 
 A robust, type-safe, and modular REST API built using Express, TypeScript, and MongoDB via Mongoose. This project allows users to manage a collection of books and borrowing operations within a library.
 
+[![Library Management API](https://img.shields.io/badge/API-View%20Library%20Management-blue?style=for-the-badge&logo=vercel)](https://library-management-server-mocha.vercel.app/)
+
 **🚀 Features**
 
 - 📖 CRUD operations for books
