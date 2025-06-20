@@ -4,6 +4,9 @@ A robust, type-safe, and modular REST API built using Express, TypeScript, and M
 
 [![Library Management API](https://img.shields.io/badge/API-View%20Library%20Management-blue?style=for-the-badge&logo=vercel)](https://library-management-server-mocha.vercel.app/)
 
+[![Video ReadMe](https://img.shields.io/badge/📽️%20Watch%20Video%20ReadMe-blue?style=for-the-badge)](https://drive.google.com/drive/folders/1weiJuFP9FC-QJP01EEKtV6S7NlzIrCSY?usp=sharing)
+
+
 **🚀 Features**
 
 - 📖 CRUD operations for books
