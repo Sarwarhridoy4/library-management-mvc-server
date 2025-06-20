@@ -49,6 +49,14 @@ export const getBookById = async (
 ) => {
   try {
     const result = await BookService.getBookById(req.params.bookId);
+    if (!result) {
+      return sendResponse(res, {
+        statusCode: 404,
+        success: false,
+        message: `The book with id ${req.params.bookId} not found`,
+        data: null,
+      });
+    }
     sendResponse(res, {
       success: true,
       message: "Book retrieved successfully",
@@ -67,6 +75,14 @@ export const updateBook = async (
   try {
     // const parsed = updateBookZodSchema.parse(req.body);
     const result = await BookService.updateBook(req.params.bookId, req.body);
+    if (!result) {
+      return sendResponse(res, {
+        statusCode: 404,
+        success: false,
+        message: `The book with id ${req.params.bookId} not found`,
+        data: null,
+      });
+    }
     sendResponse(res, {
       statusCode: 200,
       success: true,
@@ -84,9 +100,17 @@ export const deleteBook = async (
   next: NextFunction
 ) => {
   try {
-    BookService.deleteBook(req.params.bookId);
+    const deleteBook = await BookService.deleteBook(req.params.bookId);
+    if (!deleteBook) {
+      return sendResponse(res, {
+        statusCode: 404,
+        success: false,
+        message: `The book with id ${req.params.bookId} not found`,
+        data: null,
+      });
+    }
     sendResponse(res, {
-      statusCode: 204,
+      statusCode: 200,
       success: true,
       message: "Book deleted successfully",
       data: null,
