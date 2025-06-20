@@ -20,7 +20,7 @@ A robust, type-safe, and modular REST API built using Express, TypeScript, and M
 
 # 📁 Project Structure
 
-````bash
+```bash
 src/
 ├── app/
 │   ├── routes/                 # Home routes
@@ -54,6 +54,7 @@ src/
 ├── package-lock.json
 ├── readme.md
 ├── tsconfig.json
+
 ```
 
 
@@ -74,9 +75,9 @@ src/
 **🔰 Base URL**
 
 ```bash
-
 http://localhost:5000/api
-````
+```
+
 
 **🌐 Home Route**
 `GET /`
