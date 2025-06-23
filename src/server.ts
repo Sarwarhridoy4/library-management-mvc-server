@@ -1,4 +1,5 @@
-import "dotenv/config"; // Load environment variables from .env file
+import dotenv from "dotenv";
+dotenv.config();
 import app from "./app";
 import connectDB from "./app/config/db"; // must come *after* dotenv.config()
 
