@@ -1,97 +1,86 @@
+---
 # 📚 Library Management System API
 
-A robust, type-safe, and modular REST API built using Express, TypeScript, and MongoDB via Mongoose. This project allows users to manage a collection of books and borrowing operations within a library.
+A robust, scalable, and type-safe REST API built with **Node.js**, **Express**, **TypeScript**, and **MongoDB (Mongoose)**. Designed for managing library resources efficiently, this backend service provides full CRUD functionality for books, borrowing workflows, and insightful borrowing summaries.
 
-[![Library Management API](https://img.shields.io/badge/API-View%20Library%20Management-blue?style=for-the-badge&logo=vercel)](https://library-management-server-swart-seven.vercel.app)
+[![Library Management API](https://img.shields.io/badge/API-Live%20Demo-blue?style=for-the-badge\&logo=vercel)](https://library-management-server-swart-seven.vercel.app)
 
-[![Video ReadMe](https://img.shields.io/badge/📽️%20Watch%20Video%20ReadMe-blue?style=for-the-badge)](https://drive.google.com/drive/folders/1weiJuFP9FC-QJP01EEKtV6S7NlzIrCSY?usp=sharing)
+[![Video ReadMe](https://img.shields.io/badge/📽️%20Video%20Walkthrough-blue?style=for-the-badge)](https://drive.google.com/drive/folders/1weiJuFP9FC-QJP01EEKtV6S7NlzIrCSY?usp=sharing)
+---
 
+## 🚀 Features
 
-**🚀 Features**
+- 🔧 Full CRUD support for managing books
+- 🔄 Borrowing system with dynamic availability tracking
+- 📊 Aggregated reports on borrowing history
+- ✅ Input validation using **Zod**
+- 🧠 Business logic via **Mongoose** static & instance methods
+- 🔥 Centralized and consistent error handling
+- 📁 Modular, maintainable code structure using a layered architecture
 
-- 📖 CRUD operations for books
+---
 
-- 🔄 Borrowing logic with availability tracking
-
-- 📊 Aggregated borrow summaries
-
-- ✅ Zod-powered request validation
-
-- 🧠 Mongoose middleware, static & instance methods
-
-- 🔐 Centralized error handling
-
-- 🧱 Modular and scalable codebase
-
-# 📁 Project Structure
-
-```bash
-src/
-├── app/
-│   ├── routes/                 # Home routes
-│   │   └── index.ts
-│   ├── modules/
-│   │   ├── book/
-│   │   │   ├── book.controller.ts
-│   │   │   ├── book.model.ts
-│   │   │   ├── book.route.ts
-│   │   │   ├── book.service.ts
-│   │   │   └── book.interface.ts
-│   │   └── borrow/
-│   │       ├── borrow.controller.ts
-│   │       ├── borrow.model.ts
-│   │       ├── borrow.route.ts
-│   │       ├── borrow.service.ts
-│   │       └── borrow.interface.ts
-│   ├── middlewares/
-│   │   └── errorHandler.ts
-│   ├── utils/
-│   │   ├── sendResponse.ts
-│   │   └── sendResponse.interface.ts
-│   └── config/
-│       └── db.ts               # MongoDB connection
-├── app.ts                      # Express app configuration
-├── server.ts                   # Application entry point
-└── .env                        # Environment variables
-├── .gitignore
-├── eslint.config.mjs         # ESLint Flat Config (using @eslint/js +typescript-eslint)
-├── package.json
-├── package-lock.json
-├── readme.md
-├── tsconfig.json
+## 🗂️ Project Structure
 
 ```
+src/
+├── app/
+│   ├── config/                # MongoDB connection
+│   ├── middlewares/          # Global error handler
+│   ├── modules/
+│   │   ├── book/             # Book module: model, controller, route, etc.
+│   │   └── borrow/           # Borrow module: logic and aggregation
+│   ├── routes/               # Root/home routes
+│   └── utils/                # Utility functions (e.g., standardized responses)
+├── app.ts                    # Express app setup
+├── server.ts                 # Entry point
+├── .env                      # Environment variables
+├── tsconfig.json             # TypeScript configuration
+├── eslint.config.mjs         # ESLint configuration
+└── package.json
+```
 
+---
 
-**🧪 Technologies Used**
+## ⚙️ Tech Stack
 
-- Node.js, Express
+- **Node.js** + **Express** – RESTful server
+- **TypeScript** – Static typing and robust structure
+- **MongoDB + Mongoose** – Data modeling and querying
+- **Zod** – Schema validation
+- **ESLint & Prettier** – Code linting and formatting
 
-- TypeScript
+---
 
-- MongoDB + Mongoose
+## 🔌 API Overview
 
-- Zod for input validation
+### 🔰 Base URL
 
-- ESLint, Prettier for code quality
-
-# 📌 API Endpoints
-
-**🔰 Base URL**
-
-```bash
+```
 http://localhost:5000/api
 ```
 
+---
 
-**🌐 Home Route**
-`GET /`
+### 🏠 Root Endpoint
 
-Returns a welcome message and available API routes.
+```http
+GET /
+```
 
-**📚 Book Routes**
-`POST /api/books`
-Create a new book.
+Returns a welcome message and links to all available routes.
+
+---
+
+### 📚 Book Endpoints
+
+#### ➕ Create a Book
+
+```http
+POST /api/books
+```
+
+**Request Body:**
 
 ```json
 {
@@ -104,24 +93,36 @@ Create a new book.
 }
 ```
 
-`GET /api/books`
-Get all books. Supports filtering and sorting.
+---
 
-**- **
+#### 📖 Get All Books
 
-- filter: Genre filter (FICTION, SCIENCE, etc.)
+```http
+GET /api/books
+```
 
-- sortBy: Sort key (e.g., createdAt)
+**Query Parameters (optional):**
 
-- sort: asc or desc
+- `genre` — Filter by genre
+- `sortBy` — Sort field (e.g., `createdAt`)
+- `sort` — `asc` or `desc`
+- `limit` — Number of results
 
-- limit: Number of results
+---
 
-`GET /api/books/:bookId`
-Get a book by ID.
+#### 🔍 Get Single Book
 
-`PUT /api/books/:bookId`
-Update book details. Accepts partial fields.
+```http
+GET /api/books/:bookId
+```
+
+---
+
+#### ✏️ Update Book (Partial Allowed)
+
+```http
+PUT /api/books/:bookId
+```
 
 ```json
 {
@@ -129,12 +130,23 @@ Update book details. Accepts partial fields.
 }
 ```
 
-`DELETE /api/books/:bookId`
-Deletes a book.
+---
 
-**🔄 Borrow Routes**
-`POST /api/borrow`
-Borrow a book.
+#### 🗑️ Delete Book
+
+```http
+DELETE /api/books/:bookId
+```
+
+---
+
+### 🔄 Borrow Endpoints
+
+#### 📥 Borrow a Book
+
+```http
+POST /api/borrow
+```
 
 ```json
 {
@@ -144,16 +156,17 @@ Borrow a book.
 }
 ```
 
-# Business Logic:
+> ✅ Automatically updates availability based on remaining copies. If `copies === 0`, `available = false` (via instance method).
 
-- Copies must be available.
+---
 
-- Book availability is automatically updated.
+#### 📊 Borrow Summary Report
 
-- Mongoose instance method ensures available = false if copies drop to 0.
+```http
+GET /api/borrow
+```
 
-`GET /api/borrow`
-Returns an aggregated summary:
+**Example Response:**
 
 ```json
 [
@@ -167,51 +180,76 @@ Returns an aggregated summary:
 ]
 ```
 
-## 🧪 Validation Rules (Zod)
+---
 
-**Book:**
+## ✅ Validation Rules (Zod)
 
-- title, author, isbn, genre, and copies are required.
+### 📘 Book Schema
 
-- genre must be one of the allowed enums.
+- `title`, `author`, `isbn`, `genre`, and `copies` — required
+- `genre` must be one of: `FICTION`, `SCIENCE`, `BIOGRAPHY`, etc.
 
-**Borrow:**
+### 🔁 Borrow Schema
 
-- book, quantity, and dueDate are required.
+- `book`, `quantity`, and `dueDate` — required
+- `quantity` must be a positive integer
 
-- quantity must be positive.
+---
 
-# 🧠 Key Architecture & Concepts
+## 🧠 Architectural Highlights
 
-- ✅ Zod Validation Layer: Enforces shape of requests
+- **Zod Validation** – Centralized validation layer for clean and safe inputs
+- **Service Layer Pattern** – Separates business logic from controllers
+- **Mongoose Instance Methods** – Book model manages its own availability status
+- **Aggregation Pipelines** – Efficiently compute borrow summaries
+- **Global Error Handling** – Middleware-based error formatting and logging
 
-- 🧩 Service Layer: Business logic is decoupled from controllers
+---
 
-- 🔄 Mongoose Instance Method: book.updateAvailability() updates availability status dynamically
+## 🛠️ Getting Started
 
-- 📊 Aggregation Pipeline: Used in /api/borrow to compute total borrow count per book
-
-- 🔥 Error Handler: Catches and formats all application errors
-
-# 🛠️ Setup Instructions
+### 1️⃣ Clone the Repository
 
 ```bash
-
-
-# Clone the repo
-
 git clone https://github.com/yourname/library-management-api.git
-
-# Install dependencies
-
 cd library-management-api
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
 npm install
+```
 
-# Create a .env file and add your MongoDB URI
+### 3️⃣ Configure Environment
 
-echo "MONGODB_URI=mongodb://localhost:27017/library" > .env
+Create a `.env` file in the root:
 
-# Start the server
+```bash
+MONGODB_URI=mongodb://localhost:27017/library
+PORT=5000
+```
 
+### 4️⃣ Start the Development Server
+
+```bash
 npm run dev
 ```
+
+> Server should now be running at: [http://localhost:5000](http://localhost:5000)
+
+---
+
+## 📎 Useful Links
+
+- 🔗 **Live API:** [https://library-management-server-swart-seven.vercel.app](https://library-management-server-swart-seven.vercel.app)
+- 📽️ **Video Demo:** [Watch here](https://drive.google.com/drive/folders/1weiJuFP9FC-QJP01EEKtV6S7NlzIrCSY?usp=sharing)
+
+---
+
+## 🧑‍💻 Author
+
+**Sarwar Hossain**
+[GitHub Profile](https://github.com/Sarwarhridoy4)
+
+---
