@@ -1,5 +1,5 @@
 {
-  "name": "library-management-server",
+  "name": "library-management-server-redux",
   "version": "1.0.0",
   "main": "index.js",
   "type": "commonjs",
