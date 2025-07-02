@@ -1,5 +1,3 @@
-import { Genre } from "./book.types";
-
 export interface IBookMethods {
   updateAvailability(): Promise<IBookDocument>;
 }
@@ -7,7 +5,7 @@ export interface IBookMethods {
 export type IBookBase = {
   title: string;
   author: string;
-  genre: Genre;
+  genre: string;
   isbn: string;
   description?: string;
   copies: number;
