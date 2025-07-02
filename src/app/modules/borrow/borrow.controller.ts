@@ -2,6 +2,7 @@
 import { Request, Response, NextFunction } from "express";
 import { sendResponse } from "../../utils/sendResponse";
 import { BorrowService } from "./borrow.service";
+import { createBorrowZodSchema } from "./borrow.validation";
 // import { createBorrowZodSchema } from "./borrow.validation";
 
 export const borrowBook = async (
@@ -10,8 +11,8 @@ export const borrowBook = async (
   next: NextFunction
 ) => {
   try {
-    // const parsed = createBorrowZodSchema.parse(req.body);
-    const parsed = req.body;
+    const parsed = createBorrowZodSchema.parse(req.body);
+    // const parsed = req.body;
     const borrowed = await BorrowService.borrowBook(
       parsed.book,
       parsed.quantity,

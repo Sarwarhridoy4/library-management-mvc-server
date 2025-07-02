@@ -1,7 +1,7 @@
 // src/modules/book/book.controller.ts
 import { Request, Response, NextFunction } from "express";
 
-// import { createBookZodSchema, updateBookZodSchema } from "./book.validation";
+import { createBookZodSchema, updateBookZodSchema } from "./book.validation";
 import { sendResponse } from "../../utils/sendResponse";
 import { BookService } from "./book.service";
 
@@ -11,8 +11,8 @@ export const createBook = async (
   next: NextFunction
 ) => {
   try {
-    // const parsed = createBookZodSchema.parse(req.body);
-    const result = await BookService.createBook(req.body);
+    const parsed = createBookZodSchema.parse(req.body);
+    const result = await BookService.createBook(parsed);
     sendResponse(res, {
       statusCode: 201,
       success: true,
@@ -73,8 +73,8 @@ export const updateBook = async (
   next: NextFunction
 ) => {
   try {
-    // const parsed = updateBookZodSchema.parse(req.body);
-    const result = await BookService.updateBook(req.params.bookId, req.body);
+    const parsed = updateBookZodSchema.parse(req.body);
+    const result = await BookService.updateBook(req.params.bookId, parsed);
     if (!result) {
       return sendResponse(res, {
         statusCode: 404,
@@ -100,6 +100,17 @@ export const deleteBook = async (
   next: NextFunction
 ) => {
   try {
+    // delete book from borrowed books list if exists to avoid orphaned records
+    const deleteBorrowedRecord =
+      await BookService.deleteBorrowedRecordBeforeDeleteBook(req.params.bookId);
+    if (!deleteBorrowedRecord) {
+      return sendResponse(res, {
+        statusCode: 404,
+        success: false,
+        message: `The book with id ${req.params.bookId} not found in borrowed records`,
+        data: null,
+      });
+    }
     const deleteBook = await BookService.deleteBook(req.params.bookId);
     if (!deleteBook) {
       return sendResponse(res, {

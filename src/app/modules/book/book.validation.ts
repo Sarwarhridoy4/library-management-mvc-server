@@ -20,7 +20,9 @@ export const createBookZodSchema = z.object({
   isbn: z.string({ required_error: "ISBN is required" }),
   description: z.string().optional(),
   copies: z.number({ required_error: "Copies is required" }).int().min(0),
-  available: z.boolean(),
+  available: z
+    .boolean({ required_error: "Availability status is required" })
+    .default(true),
 });
 
 export const updateBookZodSchema = z.object({
