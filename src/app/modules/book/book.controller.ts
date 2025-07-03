@@ -31,14 +31,15 @@ export const getBooks = async (
 ) => {
   try {
     const result = await BookService.getBooks(req.query);
-    sendResponse(res, {
+
+    res.status(200).json({
       statusCode: 200,
       success: true,
       message: "Books retrieved successfully",
-      data: result,
+      ...result, // <- 👈 merges data + meta at root
     });
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };
 

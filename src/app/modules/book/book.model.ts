@@ -18,18 +18,6 @@ const bookSchema = new Schema<IBookDocument>(
     genre: {
       type: String,
       required: [true, "Genre is required"],
-      // enum: {
-      //   values: [
-      //     "FICTION",
-      //     "NON_FICTION",
-      //     "SCIENCE",
-      //     "HISTORY",
-      //     "BIOGRAPHY",
-      //     "FANTASY",
-      //   ],
-      //   message:
-      //     "Genre must be one of: FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, FANTASY",
-      // },
     },
     isbn: {
       type: String,

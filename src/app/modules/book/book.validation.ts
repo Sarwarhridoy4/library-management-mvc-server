@@ -28,7 +28,7 @@ export const createBookZodSchema = z.object({
 export const updateBookZodSchema = z.object({
   title: z.string().optional(),
   author: z.string().optional(),
-  genre: genreEnum.optional(),
+  genre: z.string().optional(),
   isbn: z.string().optional(),
   description: z.string().optional(),
   copies: z.number().int().min(0).optional(),

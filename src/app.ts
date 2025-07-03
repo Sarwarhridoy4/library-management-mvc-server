@@ -6,18 +6,34 @@ import BorrowRoutes from "./app/modules/borrow/borrow.route";
 
 const app: Application = express();
 
+const whitelist = [
+  "http://localhost:5173",
+  "https://shelf-wise-two.vercel.app",
+];
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      callback(null, origin || "*");
+      if (!origin) {
+        // ➜ Same‑origin or non‑browser request (no Origin header) – allow it
+        return callback(null, true);
+      }
+
+      if (whitelist.includes(origin)) {
+        // ➜ Allowed cross‑origin request
+        return callback(null, true);
+      }
+
+      // ➜ Reject everything else
+      return callback(new Error(`CORS: ${origin} is not allowed`), false);
     },
-    // credentials: true // Allow credentials for cookies, authorization headers, etc.
+    credentials: true, // keep if you need cookies / auth headers
+    optionsSuccessStatus: 200, // fixes legacy browser quirks
   })
 );
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (_req: Request, res: Response) => {
   res.status(200).json({
     message: "Welcome to the Library Management API...",
   });
