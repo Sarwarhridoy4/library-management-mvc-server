@@ -4,17 +4,15 @@
 
 import { z } from "zod";
 
-
-
 export const createBookZodSchema = z.object({
-  title: z.string({ required_error: "Title is required" }),
-  author: z.string({ required_error: "Author is required" }),
-  genre: z.string({ required_error: "Genre is required" }),
-  isbn: z.string({ required_error: "ISBN is required" }),
+  title: z.string({ error: "Title is required" }),
+  author: z.string({ error: "Author is required" }),
+  genre: z.string({ error: "Genre is required" }),
+  isbn: z.string({ error: "ISBN is required" }),
   description: z.string().optional(),
-  copies: z.number({ required_error: "Copies is required" }).int().min(0),
+  copies: z.number({ error: "Copies is required" }).int().min(0),
   available: z
-    .boolean({ required_error: "Availability status is required" })
+    .boolean({ error: "Availability status is required" })
     .default(true),
 });
 
