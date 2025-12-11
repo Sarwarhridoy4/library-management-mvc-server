@@ -1,7 +1,7 @@
 // src/modules/book/book.service.ts
 import { IBookBase, IBookDocument } from "./book.interface";
 import { Book } from "./book.model";
-import { FilterQuery } from "mongoose";
+import { QueryFilter } from "mongoose";
 import { IBookQuery, PaginatedBooks } from "./book.types";
 import { Borrow } from "../borrow/borrow.model";
 
@@ -12,7 +12,7 @@ export const createBook = async (payload: IBookBase) => {
 
 export const getBooks = async (query: IBookQuery): Promise<PaginatedBooks> => {
   // ── Filters ──────────────────────────────────────────────────────────
-  const filter: FilterQuery<IBookDocument> = {};
+  const filter: QueryFilter<IBookDocument> = {};
   if (query.filter) filter.genre = query.filter;
 
   // ── Sorting ──────────────────────────────────────────────────────────
