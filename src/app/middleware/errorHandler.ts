@@ -2,9 +2,9 @@ import { ErrorRequestHandler } from "express";
 
 export const globalErrorHandler: ErrorRequestHandler = (
   err,
-  req,
+  _req,
   res,
-  next
+  _next
 ) => {
   const statusCode = 400;
   const message = err.message || "Something went wrong";
