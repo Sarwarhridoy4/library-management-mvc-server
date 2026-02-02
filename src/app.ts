@@ -35,7 +35,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.get("/", (_req: Request, res: Response) => {
   res.status(200).json({
-    message: "Welcome to the Library Management API...",
+    message: "Welcome to the ShelfWise Library Management API. This service provides robust functionalities for managing books and borrowings within a library system.",
+    routes: {
+      books: "/api/books",
+      borrow: "/api/borrow",
+    },
   });
 });
 
