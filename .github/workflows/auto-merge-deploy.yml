@@ -33,7 +33,7 @@ jobs:
   auto-merge:
     needs: test-and-build
     runs-on: ubuntu-latest
-    if: github.event.pull_request.draft == false
+    if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
 
     permissions:
       pull-requests: write
