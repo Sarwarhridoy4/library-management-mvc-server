@@ -3,7 +3,7 @@
 
 A robust, scalable, and type-safe REST API built with **Node.js**, **Express**, **TypeScript**, and **MongoDB (Mongoose)**. Designed for managing library resources efficiently, this backend service provides full CRUD functionality for books, borrowing workflows, and insightful borrowing summaries.
 
-[![Library Management API](https://img.shields.io/badge/API-Live%20Demo-blue?style=for-the-badge\&logo=vercel)](https://library-management-server-swart-seven.vercel.app)
+[![Library Management API](https://img.shields.io/badge/API-Live%20Demo-blue?style=for-the-badge\&logo=vercel)](https://library-management-server-redux.vercel.app)
 
 [![Video ReadMe](https://img.shields.io/badge/📽️%20Video%20Walkthrough-blue?style=for-the-badge)](https://drive.google.com/drive/folders/1weiJuFP9FC-QJP01EEKtV6S7NlzIrCSY?usp=sharing)
 ---
