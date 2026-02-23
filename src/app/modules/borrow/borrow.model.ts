@@ -1,8 +1,8 @@
 // src/modules/borrow/borrow.model.ts
 import { Schema, model } from "mongoose";
-import { IBorrowDocument } from "./borrow.interface";
+import type { IBorrow } from "./borrow.interface";
 
-const borrowSchema = new Schema<IBorrowDocument>(
+const borrowSchema = new Schema<IBorrow>(
   {
     book: {
       type: Schema.Types.ObjectId,
@@ -24,4 +24,4 @@ const borrowSchema = new Schema<IBorrowDocument>(
   }
 );
 
-export const Borrow = model<IBorrowDocument>("Borrow", borrowSchema);
+export const Borrow = model<IBorrow>("Borrow", borrowSchema);

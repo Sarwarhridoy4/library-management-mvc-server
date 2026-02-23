@@ -4,24 +4,52 @@
 
 import { z } from "zod";
 
+const requiredString = (field: string) =>
+  z.string({
+    error: (issue) =>
+      issue.input === undefined
+        ? `${field} is required`
+        : `${field} must be a string`,
+  });
+
+const requiredNumber = (field: string) =>
+  z.number({
+    error: (issue) =>
+      issue.input === undefined
+        ? `${field} is required`
+        : `${field} must be a number`,
+  });
+
+const requiredBoolean = (field: string) =>
+  z.boolean({
+    error: (issue) =>
+      issue.input === undefined
+        ? `${field} is required`
+        : `${field} must be a boolean`,
+  });
+
 export const createBookZodSchema = z.object({
-  title: z.string({ error: "Title is required" }),
-  author: z.string({ error: "Author is required" }),
-  genre: z.string({ error: "Genre is required" }),
-  isbn: z.string({ error: "ISBN is required" }),
+  title: requiredString("Title"),
+  author: requiredString("Author"),
+  genre: requiredString("Genre"),
+  isbn: requiredString("ISBN"),
   description: z.string().optional(),
-  copies: z.number({ error: "Copies is required" }).int().min(0),
-  available: z
-    .boolean({ error: "Availability status is required" })
-    .default(true),
+  copies: requiredNumber("Copies")
+    .int()
+    .min(0, { error: "Copies must be a non-negative integer" }),
+  available: requiredBoolean("Availability status").default(true),
 });
 
 export const updateBookZodSchema = z.object({
-  title: z.string().optional(),
-  author: z.string().optional(),
-  genre: z.string().optional(),
-  isbn: z.string().optional(),
-  description: z.string().optional(),
-  copies: z.number().int().min(0).optional(),
-  available: z.boolean().optional(),
+  title: z.string({ error: "Title must be a string" }).optional(),
+  author: z.string({ error: "Author must be a string" }).optional(),
+  genre: z.string({ error: "Genre must be a string" }).optional(),
+  isbn: z.string({ error: "ISBN must be a string" }).optional(),
+  description: z.string({ error: "Description must be a string" }).optional(),
+  copies: z
+    .number({ error: "Copies must be a number" })
+    .int()
+    .min(0, { error: "Copies must be a non-negative integer" })
+    .optional(),
+  available: z.boolean({ error: "Availability must be a boolean" }).optional(),
 });

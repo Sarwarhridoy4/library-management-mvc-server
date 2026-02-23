@@ -3,9 +3,14 @@
 // src/modules/book/book.model.ts
 
 import { model, Schema } from "mongoose";
-import { IBookDocument } from "./book.interface";
+import type {
+  BookDocument,
+  BookModel,
+  IBookBase,
+  IBookMethods,
+} from "./book.interface";
 
-const bookSchema = new Schema<IBookDocument>(
+const bookSchema = new Schema<IBookBase, BookModel, IBookMethods>(
   {
     title: {
       type: String,
@@ -25,13 +30,11 @@ const bookSchema = new Schema<IBookDocument>(
       unique: true,
     },
     description: { type: String },
-    copies: [
-      {
-        type: Number,
-        required: [true, "Number of copies is required"],
-        min: [0, "Copies must be a positive number"],
-      },
-    ],
+    copies: {
+      type: Number,
+      required: [true, "Number of copies is required"],
+      min: [0, "Copies must be a positive number"],
+    },
     available: {
       type: Boolean,
       default: true,
@@ -39,13 +42,13 @@ const bookSchema = new Schema<IBookDocument>(
   },
   {
     timestamps: true,
+    methods: {
+      updateAvailability(this: BookDocument) {
+        this.available = this.copies > 0;
+        return this.save();
+      },
+    },
   }
 );
 
-bookSchema.methods.updateAvailability = function () {
-  // Update the availability based on the number of copies
-  this.available = this.copies > 0;
-  return this.save();
-};
-
-export const Book = model<IBookDocument>("Book", bookSchema);
+export const Book = model<IBookBase, BookModel>("Book", bookSchema);

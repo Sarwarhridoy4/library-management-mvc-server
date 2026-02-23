@@ -1,6 +1,4 @@
-export interface IBookMethods {
-  updateAvailability(): Promise<IBookDocument>;
-}
+import type { HydratedDocument, Model } from "mongoose";
 
 export type IBookBase = {
   title: string;
@@ -12,7 +10,15 @@ export type IBookBase = {
   available: boolean;
 };
 
-export type IBookDocument = IBookBase & Document & IBookMethods;
+export interface IBookMethods {
+  updateAvailability(
+    this: HydratedDocument<IBookBase, IBookMethods>
+  ): Promise<HydratedDocument<IBookBase, IBookMethods>>;
+}
+
+export type BookDocument = HydratedDocument<IBookBase, IBookMethods>;
+
+export type BookModel = Model<IBookBase, {}, IBookMethods>;
 
 export interface PaginatedBooks {
   data: IBookBase[]; // <- exactly what the UI wants

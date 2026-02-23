@@ -1,4 +1,4 @@
-import { IBookDocument } from "./book.interface";
+import type { BookDocument } from "./book.interface";
 
 // This file defines the types and interfaces for the book module.
 // This code wont be used anymore, because genre aren't limited anymore.
@@ -19,7 +19,7 @@ export type IBookQuery = {
 };
 
 export type PaginatedBooks = {
-  data: IBookDocument[];
+  data: BookDocument[];
   meta: {
     totalItems: number;
     totalPages: number;

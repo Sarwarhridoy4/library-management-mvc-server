@@ -1,4 +1,4 @@
-import { Document, Types } from "mongoose";
+import type { HydratedDocument, Types } from "mongoose";
 
 export interface IBorrow {
   book: Types.ObjectId;
@@ -6,4 +6,4 @@ export interface IBorrow {
   dueDate: Date;
 }
 
-export interface IBorrowDocument extends IBorrow, Document {}
+export type IBorrowDocument = HydratedDocument<IBorrow>;
