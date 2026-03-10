@@ -18,7 +18,7 @@ export interface IBookMethods {
 
 export type BookDocument = HydratedDocument<IBookBase, IBookMethods>;
 
-export type BookModel = Model<IBookBase, {}, IBookMethods>;
+export type BookModel = Model<IBookBase, Record<string, never>, IBookMethods>;
 
 export interface PaginatedBooks {
   data: IBookBase[]; // <- exactly what the UI wants
